@@ -35,7 +35,7 @@
                 <form action="{{ route('products.destroy', $v->product_id) }}" method="POST" style="display:inline">
                     {{ csrf_field() }}
                     @method('DELETE')
-                    <a href="{{ route('products.edit', $v->product_id) }}">Edit</a> {{-- Tombol Edit --}}
+                    <a href="{{ route('products.edit', $v->product_id) }}">Edit</a> 
                     <button type="submit" onclick="return confirm('Are you sure you want to delete this products?')">
                         Delete
                     </button>

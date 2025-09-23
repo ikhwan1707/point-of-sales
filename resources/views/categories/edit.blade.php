@@ -3,7 +3,8 @@
     {{ csrf_field() }}
     @method('PUT')
     <label>Nama:</label>
-    <input type="text" name="name" value="{{$dataeditcategory->name}}" required>
+    <input type="text" name="name" value="{{$dataeditcategory->name}}">
+    <br>
     <br>
     <label>Deskripsi:</label>
     <textarea name="description">{{$dataeditcategory->description}}</textarea>

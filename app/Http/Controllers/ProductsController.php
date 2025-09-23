@@ -29,7 +29,6 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'name'        => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -39,6 +38,8 @@ class ProductsController extends Controller
             'status'      => 'required|in:available,unavailable',
             'categorie_id' => 'required',
         ]);
+
+        $image = null;
 
         if ($request->hasFile('image')) {
             $image = $request->file('image')->store('products', 'public');
@@ -79,7 +80,41 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name'         => 'required|string|max:255',
+            'description'  => 'nullable|string',
+            'price'        => 'required|numeric|min:0',
+            'stock'        => 'required|integer|min:0',
+            'image'        => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'status'       => 'required|in:available,unavailable',
+            'categorie_id' => 'required|exists:categories,categorie_id',
+        ]);
+
+        $product = Products::findOrFail($id);
+
+        // default pakai gambar lama
+        $image = $product->image;
+
+        // kalau ada upload baru, hapus lama lalu simpan baru
+        if ($request->hasFile('image')) {
+            if ($product->image) {
+                \Storage::disk('public')->delete($product->image);
+            }
+            $image = $request->file('image')->store('products', 'public');
+        }
+
+        // update manual per field
+        $product->update([
+            'name'         => $request->name,
+            'description'  => $request->description,
+            'price'        => $request->price,
+            'stock'        => $request->stock,
+            'image'        => $image,
+            'status'       => $request->status,
+            'categorie_id' => $request->categorie_id,
+        ]);
+
+        return redirect()->route('products.index');
     }
 
     /**
@@ -90,6 +125,7 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Products::where('product_id', $id)->delete();
+        return redirect()->route('products.index');
     }
 }

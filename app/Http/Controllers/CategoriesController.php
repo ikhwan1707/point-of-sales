@@ -42,11 +42,12 @@ class CategoriesController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|string|max:255|unique:categories, name' . $id,
+            'name' => 'required|string|max:255|unique:categories,name,' . $id . ',categorie_id',
             'description' => 'nullable|string',
         ]);
 
         $updatedata = Categories::findOrFail($id);
+        
         $updatedata->update([
             'name' => $request->name,
             'description' => $request->description

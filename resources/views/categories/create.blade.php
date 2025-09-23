@@ -2,10 +2,15 @@
 <form action="{{ route('category.store') }}" method="POST">
     {{ csrf_field() }}
     <label>Nama:</label>
-    <input type="text" name="name">
+    <input type="text" name="name" value="{{old('name')}}">
+    <br>
+    @if ($errors->has('name'))
+    <span>{{ $errors->first('name') }}</span>
+    @endif
     <br>
     <label>Deskripsi:</label>
-    <textarea name="description"></textarea>
+    <textarea name="description">{{ old('description') }}</textarea>
     <br>
+    
     <button type="submit">Save</button>
 </form>
