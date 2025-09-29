@@ -22,6 +22,6 @@ class Products extends Model
     // Relasi ke Category
     public function categories()
     {
-        return $this->belongsTo(Categories::class, 'categorie_id', 'categorie_id');
+        return $this->belongsTo(Categories::class, 'categorie_id');
     }
 }

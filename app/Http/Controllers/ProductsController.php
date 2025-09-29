@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Products;
-use App\Categories;
+use App\Products; //untuk memanggil model products
+use App\Categories; //untuk memanggil model categories
 
 class ProductsController extends Controller
 {
@@ -47,7 +47,7 @@ class ProductsController extends Controller
 
         Products::create([
             'name'        => $request->name,
-            'description' => $request->description,
+            'description' => $request->descriptiond,
             'price'       => $request->price,
             'stock'       => $request->stock,
             'image'       => $image,

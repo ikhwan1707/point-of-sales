@@ -10,7 +10,7 @@
             <th>Status</th>
             <th>Image</th>
             <th>
-                <a href="{{ route('products.create') }}">+ Create Products</a>
+                <a href="{{route('products.create')}}">+ Create Products</a>
             </th>
         </tr>
     </thead>
@@ -25,17 +25,17 @@
             <td>{{ ucfirst($v->status) }}</td>
             <td>
                 @if ($v->image)
-                <img src="{{ asset('storage/'.$v->image) }}" width="60">
+                <img src="{{ asset('storage/'.$v->image) }}" width="100">
                 @else
                 -
                 @endif
             </td>
             <td>
 
-                <form action="{{ route('products.destroy', $v->product_id) }}" method="POST" style="display:inline">
+                <form action="" method="POST" style="display:inline">
                     {{ csrf_field() }}
                     @method('DELETE')
-                    <a href="{{ route('products.edit', $v->product_id) }}">Edit</a> 
+                    <a href="">Edit</a> 
                     <button type="submit" onclick="return confirm('Are you sure you want to delete this products?')">
                         Delete
                     </button>
