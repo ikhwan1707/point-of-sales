@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Categories;
+use App\TransactionDetail;
 
 class Products extends Model
 {
@@ -24,4 +25,9 @@ class Products extends Model
     {
         return $this->belongsTo(Categories::class, 'categorie_id');
     }
+
+    // public function details()
+    // {
+    //     return $this->hasMany(TransactionDetail::class, 'product_id', 'product_id');
+    // }
 }

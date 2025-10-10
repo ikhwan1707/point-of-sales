@@ -5,12 +5,15 @@
     <input type="text" name="name" value="{{old('name')}}">
     <br>
     @if ($errors->has('name'))
-    <span>{{ $errors->first('name') }}</span>
+    <span class="label label-danger">{{ $errors->first('name') }}</span>
     @endif
     <br>
     <label>Deskripsi:</label>
-    <textarea name="description">{{ old('description') }}</textarea>
+    <textarea name="description">{{old('description')}}</textarea>
     <br>
-    
+@if ($errors->has('description'))
+<span class="label label-danger">{{ $errors->first('description') }}</span>
+@endif
     <button type="submit">Save</button>
+    <a href="{{route('category.index')}}">Kembali</a>
 </form>

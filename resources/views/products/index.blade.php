@@ -1,3 +1,5 @@
+@extends('template.layout')
+@section('content')
 <h3>Products</h3>
 <table border="1">
     <thead>
@@ -20,7 +22,7 @@
             <td>{{ $loop->iteration }}</td>
             <td>{{ $v->name }}</td>
             <td>{{ $v->categories->name ?? '-' }}</td>
-            <td>{{ number_format($v->price, 0, ',', '.') }}</td>
+            <td>{{  number_format($v->price, 0, ',', '.') }}</td>
             <td>{{ $v->stock }}</td>
             <td>{{ ucfirst($v->status) }}</td>
             <td>
@@ -32,7 +34,7 @@
             </td>
             <td>
 
-                <form action="" method="POST" style="display:inline">
+                <form action="{{route('products.destroy', $v->product_id)}}" method="POST" style="display:inline">
                     {{ csrf_field() }}
                     @method('DELETE')
                     <a href="{{route('products.edit', $v->product_id)}}">Edit</a>
@@ -45,3 +47,4 @@
         @endforeach
     </tbody>
 </table>
+@endsection
